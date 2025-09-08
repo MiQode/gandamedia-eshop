@@ -2,18 +2,19 @@ import Link from 'next/link';
 import Logo from './Logo';
 import SocialMedia from './SocialMedia';
 import { categoriesData, quickLinksData } from '@/constants';
+import FooterTop from './FooterTop';
 
 const Footer = () => {
   return (
     <footer className="bg-white border-t">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top section with contact info */}
-        {/* <FooterTop /> */}
+        <FooterTop />
 
         {/* Main footer content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <Logo>Tulos</Logo>
+            <Logo>GMA</Logo>
             <p className="text-gray-600 text-sm">
               Discover curated furniture collections at Tulos, blending style
               and comfort to elevate your living spaces.
