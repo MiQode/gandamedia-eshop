@@ -1,19 +1,20 @@
-import { motion } from 'motion/react';
 import { X } from 'lucide-react';
-
-import Logo from './Logo';
-import { headerData } from '@/constants';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+import { motion } from 'motion/react';
+import Logo from './Logo';
 import Link from 'next/link';
-import SocialMedia from './SocialMedia';
 import { useOutsideClick } from '@/hooks';
+import SocialMedia from './SocialMedia';
+import { CATEGORIES_QUERYResult } from '@/sanity.types';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  categories: CATEGORIES_QUERYResult;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, categories }) => {
   const pathname = usePathname();
   const sidebarRef = useOutsideClick<HTMLDivElement>(onClose);
 
@@ -31,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         className="min-w-72 max-w-96 bg-darkColor h-full text-primary-foreground p-10 border-r border-r-hoverColor/30 flex flex-col gap-6"
       >
         <div className="flex items-center justify-between">
-          <Logo className="text-white">GMA</Logo>
+          <Logo className="text-white">Tulos</Logo>
           <button
             onClick={onClose}
             className="hover:text-red-500 hoverEffect cursor-pointer"
@@ -39,15 +40,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <X />
           </button>
         </div>
-
         <div className="flex flex-col gap-3.5 text-base font-semibold tracking-wide text-zinc-400">
-          {headerData.map((item) => (
+          <Link
+            onClick={onClose}
+            href={'/'}
+            className={`hover:text-white hoverEffect ${
+              pathname === `/` && 'text-white'
+            }`}
+          >
+            Home
+          </Link>
+          {categories?.map((item) => (
             <Link
               onClick={onClose}
               key={item?.title}
-              href={item?.href}
-              className={`hover:text-darkColor hoverEffect relative group ${
-                pathname === '/' && 'text-white'
+              href={`/category/${item?.slug?.current}`}
+              className={`hover:text-white hoverEffect ${
+                pathname === `/category/${item?.slug?.current}` && 'text-white'
               }`}
             >
               {item?.title}
