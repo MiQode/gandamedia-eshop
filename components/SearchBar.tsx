@@ -1,4 +1,5 @@
 'use client';
+
 import { Loader2, Search, X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
@@ -51,6 +52,7 @@ const SearchBar = () => {
 
     return () => clearTimeout(debounceTimer); // Cleanup the timer
   }, [search, fetchProducts]);
+
   return (
     <Dialog open={showSearch} onOpenChange={() => setShowSearch(!showSearch)}>
       <DialogTrigger

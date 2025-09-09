@@ -4,6 +4,7 @@ import '../globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import localFont from 'next/font/local';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Ganda Media Agency Shop',
@@ -28,6 +29,15 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: '#000000',
+                color: '#fff',
+              },
+            }}
+          />
         </body>
       </html>
     </ClerkProvider>

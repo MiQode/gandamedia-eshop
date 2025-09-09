@@ -5,9 +5,8 @@ import toast from 'react-hot-toast';
 import PriceFormatter from './PriceFormatter';
 import { Button } from './ui/button';
 import useCartStore from '@/store';
-// import QuantityButtons from "./QuantityButtons";
-import { cn } from '@/lib/utils';
 import QuantityButtons from './QuantityButtons';
+import { cn } from '@/lib/utils';
 
 interface Props {
   product: Product;
