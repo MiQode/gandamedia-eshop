@@ -13,10 +13,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-// import {
-//   createCheckoutSession,
-//   Metadata,
-// } from '@/actions/createCheckoutSession';
 import paypalLogo from '@/images/paypalLogo.png';
 import {
   Tooltip,
@@ -27,6 +23,10 @@ import {
 import Loading from '@/components/Loading';
 import EmptyCart from '@/components/EmptyCart';
 import NoAccessToCart from '@/components/NoAccessToCart';
+import {
+  createCheckoutSession,
+  Metadata,
+} from '@/actions/createCheckoutSession';
 
 const CartPage = () => {
   const {
@@ -57,26 +57,26 @@ const CartPage = () => {
       toast.success('Your cart reset successfully!');
     }
   };
-  const handleCheckout = () => {};
-  // const handleCheckout = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const metadata: Metadata = {
-  //       orderNumber: crypto.randomUUID(),
-  //       customerName: user?.fullName ?? 'Unknown',
-  //       customerEmail: user?.emailAddresses[0]?.emailAddress ?? 'Unknown',
-  //       clerkUserId: user!.id,
-  //     };
-  //     const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
-  //     if (checkoutUrl) {
-  //       window.location.href = checkoutUrl;
-  //     }
-  //   } catch (error) {
-  //     console.error('Error creating checkout session:', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const metadata: Metadata = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? 'Unknown',
+        customerEmail: user?.emailAddresses[0]?.emailAddress ?? 'Unknown',
+        clerkUserId: user!.id,
+      };
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDeleteProduct = (id: string) => {
     deleteCartProduct(id);
