@@ -87,6 +87,8 @@ export const productType = defineType({
           { title: 'Pants', value: 'pants' },
           { title: 'Hoodie', value: 'hoodie' },
           { title: 'Short', value: 'short' },
+          { title: 'Cap', value: 'cap' },
+          { title: 'Accessory', value: 'accessory' },
           { title: 'Others', value: 'others' },
         ],
       },
